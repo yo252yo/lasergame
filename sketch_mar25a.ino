@@ -40,7 +40,7 @@ bool isOk(float x, float y){
 };
 
 float getX(){
-  return (random(400)-100)/100;
+  return (random(600)-300)/100;
 }
 float getY(){
   return (random(300))/100;
