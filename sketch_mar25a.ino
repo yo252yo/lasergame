@@ -7,7 +7,7 @@ float x,y, bob, swi;
 
 void setup() {
   swiper.attach(6);
-  bobber.attach(9);         
+  bobber.attach(9);
 
   // laser
   pinMode(13, OUTPUT);
@@ -59,7 +59,7 @@ float wait(){
   delay(1500+random(10000));
 }
 
-void blinkRand(){
+void teleport(){
   x = getX();
   y = getY();
   if (isOk(x,y)){
@@ -70,7 +70,7 @@ void goRand(){
   float newx = getX();
   float newy = getY();
   float steps = 10 + random(1000);
-  
+
   if (isOk(newx,newy)){
     go(newx, newy);
     float stepx = (newx - x)/steps;
@@ -90,27 +90,38 @@ void shake(){
     for(float i = 0;i <= 10; i ++){
       bobber.write(bob+i);
       delay(10);
-    }  
+    }
     for(float i = 10;i >= 0; i --){
       bobber.write(bob+i);
       delay(10);
-    }  
+    }
+  }
+}
+
+void blink(){
+  for(int j = 0 ; j < 2+random(10); j++){
+    digitalWrite(13, LOW);
+    delay(200);
+    digitalWrite(13, HIGH);
+    delay(200);
   }
 }
 
 void loop() {
-  switch(random(5)){
+  switch(random(6)){
     case(0):
-      blinkRand();
+      teleport();
       break;
     case(1):
       goRand();
       break;
+    case(2):
+      blink();
+      break;
     default:
-      blinkRand();
       shake();
       break;
-    
+
   }
-  wait();  
+  wait();
 }
